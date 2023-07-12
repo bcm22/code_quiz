@@ -1,3 +1,15 @@
 .display-none {
     display: none;
 }
+
+.timer {
+    float: right;
+}
+
+.question-div{
+    text-align: center;
+}
+
+.answer-button{
+    display: block;
+}

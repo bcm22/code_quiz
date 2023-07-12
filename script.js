@@ -17,24 +17,32 @@ var questionNumber;
 
 const QUESTIONS = [
     "Commonly used data types DO NOT inlcude",
-    "QUESTION @",
-    "QUESTION 3"
+    "The condition in an if / else statement is inclosed with ____.",
+    "Arrays in JavaScript can be used to store _____.",
 ]
 
 const ANSWERS1 = [
-    "strings"
+    "strings",
+    "quotes",
+    "numbers and strings",
 ]
 
 const ANSWERS2 = [
-    "booleans"
+    "booleans",
+    "curly brackets",
+    "other arrays",
 ]
 
 const ANSWERS3 = [
-    "alerts"
+    "alerts",
+    "parenthesis",
+    "booleans",
 ]
 
 const ANSWERS4 = [
-    "numbers"
+    "numbers",
+    "square brackets",
+    "all of the above",
 ]
 
 
@@ -100,6 +108,6 @@ for (i of answerButtons) {
                 console.log("INCORRECT")
             }
             createQuestion(2)
-        }
-    });
+            }
+        });
 }
