@@ -16,7 +16,7 @@ var timer;
 var questionNumber;
 
 const QUESTIONS = [
-    "Commonly used data types DO NOT inlcude",
+    "Commonly used data types DO NOT inlcude:",
     "The condition in an if / else statement is inclosed with ____.",
     "Arrays in JavaScript can be used to store _____.",
 ]
@@ -45,7 +45,6 @@ const ANSWERS4 = [
     "all of the above",
 ]
 
-
 function createQuestion(number) {
     questionNumber = number
     question.textContent = QUESTIONS[questionNumber - 1]
@@ -72,7 +71,7 @@ function startTimer() {
         timerElement.textContent = "Time: " + timerCount;
         if (timerCount >= 0) {
             // Tests if win condition is met
-            if (timerCount > 0) {
+            if (timerCount === 0) {
                 // Clears interval and stops timer
                 clearInterval(timer);
                 //   winGame();
@@ -108,6 +107,6 @@ for (i of answerButtons) {
                 console.log("INCORRECT")
             }
             createQuestion(2)
-            }
-        });
+        }
+    });
 }

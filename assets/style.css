@@ -6,10 +6,34 @@
     float: right;
 }
 
+.start-button {
+    color: white;
+    background-color: rgb(60, 31, 118);
+    text-align: center;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+.start-button:hover{
+    background-color: rgb(168, 35, 123);
+}
+
 .question-div{
     text-align: center;
 }
 
 .answer-button{
     display: block;
+    margin: auto;
+    background-color: rgb(60, 31, 118);
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+    min-height: 10px;
+    min-width: 120px;
+    margin-top: 5px;
+}
+
+.answer-button:hover{
+    background-color: rgb(168, 35, 123);
 }
