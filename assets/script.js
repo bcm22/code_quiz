@@ -10,10 +10,23 @@ var startButton = document.querySelector(".start-button");
 var questionDiv = document.querySelector(".question-div")
 var introDirv = document.querySelector(".intro")
 var timerElement = document.querySelector(".timer");
+var highScores = document.querySelector("high-scores");
+
 var scores = [];
 var timerCount;
 var timer;
 var questionNumber;
+var isWin = false;
+var finalScore;
+
+
+//hid name div until end of game
+//make intro div look better
+//add listener on submit button that addScore()
+//add listener on viewHighScore button that showHighScore
+//showHIghScore needs to hide everything else
+//Go back button add listener to show intro screen
+//clear scores button add listener to clearScore()
 
 const QUESTIONS = [
     "Commonly used data types DO NOT inlcude:",
@@ -59,8 +72,16 @@ function createQuestion(number) {
 function startQuiz() {
     introDirv.classList.add("display-none")
     timerCount = 60;
+    finalScore = 0;
     createQuestion(1)
     startTimer()
+}
+
+function addScore(){
+    const name = document.getElementById("name-input").value;
+    scores.push({name: name, score: finalScore})
+    console.log("ADDED SCORE", scores)
+    showHighScores()
 }
 
 // The setTimer function starts and stops the timer and triggers winGame() and loseGame()
@@ -71,20 +92,36 @@ function startTimer() {
         timerElement.textContent = "Time: " + timerCount;
         if (timerCount >= 0) {
             // Tests if win condition is met
-            if (timerCount === 0) {
+            if (isWin && timerCount > 0) {
                 // Clears interval and stops timer
+
                 clearInterval(timer);
-                //   winGame();
+                  endOfGame(timerCount);
             }
         }
         // Tests if time has run out
         if (timerCount === 0) {
             // Clears interval
             clearInterval(timer);
-            // loseGame();
+            endOfGame(0)
         }
     }, 1000);
 }
+
+function endOfGame(score){
+    finalScore = score
+    showHighScores()
+        //show the end game screen hide the question div
+}
+
+function showHighScores(){
+
+    for(var i =0; i < scores.length; i++){
+       highScores.innerHTML += `<p>Name: ${scores[0].name} Score: ${scores[0].score} </p>`
+    }
+    
+}
+
 
 
 function clearScores() {
@@ -92,11 +129,13 @@ function clearScores() {
 }
 
 startButton.addEventListener("click", startQuiz);
+
 for (i of answerButtons) {
     i.addEventListener('click', function () {
+        console.log("QUESTIONs", questionNumber)
         const answer = this.textContent
         console.log("CREATED LISTENER", answer, questionNumber)
-        if (questionNumber == 1) {
+        if (questionNumber === 1) {
             if (answer === 'alerts') {
                 //correct
                 console.log("CORRECT")
@@ -107,6 +146,33 @@ for (i of answerButtons) {
                 console.log("INCORRECT")
             }
             createQuestion(2)
+            return
+        }
+        if (questionNumber === 2) {
+            if (answer === 'parenthesis') {
+                //correct
+                console.log("CORRECT")
+            }
+            else {
+                //incorrect
+                timerCount -= 10
+                console.log("INCORRECT")
+            }
+            createQuestion(3)
+            return
+        }
+        if (questionNumber === 3) {
+            if (answer === 'all the above') {
+                //correct
+                console.log("CORRECT")
+            }
+            else {
+                //incorrect
+                timerCount -= 10
+                console.log("INCORRECT")
+            }
+            isWin= true
+            return
         }
     });
 }
