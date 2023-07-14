@@ -37,3 +37,8 @@
 .answer-button:hover{
     background-color: rgb(168, 35, 123);
 }
+
+.intro {
+text-align: center;
+margin: 10%;
+}

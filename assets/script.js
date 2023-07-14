@@ -6,18 +6,24 @@ var answerButton3 = document.querySelector("#answer3");
 var answerButton4 = document.querySelector("#answer4");
 var answerButtons = document.querySelectorAll(".answer-button")
 
+var submitButton = document.querySelector(".submit-score")
 var startButton = document.querySelector(".start-button");
 var questionDiv = document.querySelector(".question-div")
 var introDirv = document.querySelector(".intro")
 var timerElement = document.querySelector(".timer");
-var highScores = document.querySelector("high-scores");
+var viewHighScores = document.querySelector(".view-high-scores");
+var viewHighScoresButton = document.querySelector(".view-high-scores-button");
+var goBackButton = document.querySelector(".go-back-button");
+var clearScoresButton = document.querySelector(".clear-scores-button");
+var answerDisplay = document.querySelector(".answer-display")
+var answer = document.querySelector(".answer")
 
 var scores = [];
 var timerCount;
 var timer;
 var questionNumber;
 var isWin = false;
-var finalScore;
+var finalScreen = document.querySelector(".final-screen");
 
 
 //hid name div until end of game
@@ -73,15 +79,19 @@ function startQuiz() {
     introDirv.classList.add("display-none")
     timerCount = 60;
     finalScore = 0;
+    timerElement.classList.remove("display-none")
+    viewHighScoresButton.classList.remove("display-none")
     createQuestion(1)
     startTimer()
 }
 
-function addScore(){
+function addScore() {
     const name = document.getElementById("name-input").value;
-    scores.push({name: name, score: finalScore})
+    scores.push({ name: name, score: finalScore })
     console.log("ADDED SCORE", scores)
+    finalScreen.classList.add("display-none")
     showHighScores()
+
 }
 
 // The setTimer function starts and stops the timer and triggers winGame() and loseGame()
@@ -96,7 +106,7 @@ function startTimer() {
                 // Clears interval and stops timer
 
                 clearInterval(timer);
-                  endOfGame(timerCount);
+                endOfGame(timerCount);
             }
         }
         // Tests if time has run out
@@ -108,21 +118,27 @@ function startTimer() {
     }, 1000);
 }
 
-function endOfGame(score){
+function endOfGame(score) {
     finalScore = score
     showHighScores()
-        //show the end game screen hide the question div
+    questionDiv.classList.add("display-none")
+    finalScreen.classList.remove("display-none")
+    answerDisplay.classList.add("display-none")
+    //show the end game screen hide the question div
 }
 
-function showHighScores(){
+function showHighScores() {
 
-    for(var i =0; i < scores.length; i++){
-       highScores.innerHTML += `<p>Name: ${scores[0].name} Score: ${scores[0].score} </p>`
+    for (var i = 0; i < scores.length; i++) {
+        viewHighScores.innerHTML += `<p>Name: ${scores[0].name} Score: ${scores[0].score} </p>`
     }
-    
+    viewHighScores.classList.remove("display-none")
 }
 
-
+function goBack() {
+    introDirv.classList.remove("diplay-none")
+    viewHighScores.classList.add("display-none")
+}
 
 function clearScores() {
     scores = []
@@ -130,20 +146,25 @@ function clearScores() {
 
 startButton.addEventListener("click", startQuiz);
 
-for (i of answerButtons) {
-    i.addEventListener('click', function () {
-        console.log("QUESTIONs", questionNumber)
+for (button of answerButtons) {
+    button.addEventListener('click', function () {
         const answer = this.textContent
-        console.log("CREATED LISTENER", answer, questionNumber)
+
         if (questionNumber === 1) {
             if (answer === 'alerts') {
                 //correct
-                console.log("CORRECT")
+    
+                //show correct div
+                answer.textContent = "Correct"
+                answerDisplay.classList.remove("display-none")
             }
             else {
                 //incorrect
                 timerCount -= 10
-                console.log("INCORRECT")
+                
+                //show incorrect div
+                answer.textContent = "Wrong"
+                answerDisplay.classList.remove("display-none")
             }
             createQuestion(2)
             return
@@ -151,28 +172,38 @@ for (i of answerButtons) {
         if (questionNumber === 2) {
             if (answer === 'parenthesis') {
                 //correct
-                console.log("CORRECT")
+                
             }
             else {
                 //incorrect
                 timerCount -= 10
-                console.log("INCORRECT")
+                
             }
             createQuestion(3)
             return
         }
         if (questionNumber === 3) {
-            if (answer === 'all the above') {
+            if (answer === 'all of the above') {
                 //correct
                 console.log("CORRECT")
             }
             else {
                 //incorrect
                 timerCount -= 10
-                console.log("INCORRECT")
+        
             }
-            isWin= true
+            isWin = true
             return
         }
     });
 }
+
+submitButton.addEventListener("click", addScore);
+
+goBackButton.addEventListener("click", goBack);
+
+clearScoresButton.addEventListener("click", clearScores);
+
+viewHighScoresButton.addEventListener("click", showHighScores);
+
+

@@ -10,12 +10,13 @@
 <body>
     <header>
         <div class="intro">
-            <h2> This is the game</h2>
+            <h2> Play the coding quiz! Answer the next few questions and record your high score. Getting questions wrong
+                will subtract from your highscore!</h2>
             <button class="start-button">Start Quiz</button>
         </div>
         <div class="quizResults">
-            <a href="#View-high-scores">View high scores</a>
-            <h3 class="timer">Time: </h3>
+            <button class="view-high-scores-button display-none">View high scores</button>
+            <h3 class="timer display-none">Time: </h3>
         </div>
     </header>
 
@@ -28,20 +29,22 @@
         <button class="answer-button" id="answer4">answer1</button>
     </section>
 
-    <div class="answerDisplay display-none">
+    <div class="answer-display display-none">
         <hr>
-        <h3>Wrong</h3>
+        <h3 class="answer">Wrong</h3>
     </div>
 
-    <div class="final-screen">
-            <label for="name">Name:</label>
-            <input type="text" id="name-input" ><br><br>
-            <button class="submit-score" type="submit">Submit</button>
+    <div class="final-screen display-none">
+        <label for="name">Name:</label>
+        <input type="text" id="name-input"><br><br>
+        <button class="submit-score" type="submit">Submit</button>
 
     </div>
 
-    <div class="high-scores">
-<p></p>
+    <div class="view-high-scores display-none">
+        <p></p>
+        <button class="go-back-button">Go Back</button>
+        <button class="clear-scores-button">Clear Scores</button>
     </div>
 
     <script src="./assets/script.js"></script>
