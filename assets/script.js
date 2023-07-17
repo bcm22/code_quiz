@@ -140,6 +140,8 @@ function showHighScores() {
         scoresList.appendChild(paragraphTag)
     }
     viewHighScores.classList.remove("display-none")
+    questionDiv.classList.add("display-none")
+    timerElement.classList.add("display-none")
 }
 
 function goBack() {
@@ -148,11 +150,15 @@ function goBack() {
     finalScreen.classList.add("display-none")
     timerElement.classList.add("display-none")
     viewHighScoresButton.classList.add("display-none")
+    answerDisplay.classList.add("display-none")
+    answerDisplay2.classList.add("display-none")
 }
 
 function clearScores() {
     scores = []
     scoresList.innerHTML = ''
+    answerDisplay.classList.add("display-none")
+    answerDisplay2.classList.add("display-none")
 }
 
 startButton.addEventListener("click", startQuiz);
