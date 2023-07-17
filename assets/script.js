@@ -16,7 +16,9 @@ var viewHighScoresButton = document.querySelector(".view-high-scores-button");
 var goBackButton = document.querySelector(".go-back-button");
 var clearScoresButton = document.querySelector(".clear-scores-button");
 var answerDisplay = document.querySelector(".answer-display")
+var answerDisplay2 = document.querySelector(".answer-display2")
 var answer = document.querySelector(".answer")
+var scoresList = document.getElementById("scores-list")
 
 var scores = [];
 var timerCount;
@@ -81,6 +83,7 @@ function startQuiz() {
     finalScore = 0;
     timerElement.classList.remove("display-none")
     viewHighScoresButton.classList.remove("display-none")
+    isWin = false;
     createQuestion(1)
     startTimer()
 }
@@ -88,7 +91,6 @@ function startQuiz() {
 function addScore() {
     const name = document.getElementById("name-input").value;
     scores.push({ name: name, score: finalScore })
-    console.log("ADDED SCORE", scores)
     finalScreen.classList.add("display-none")
     showHighScores()
 
@@ -124,24 +126,33 @@ function endOfGame(score) {
     questionDiv.classList.add("display-none")
     finalScreen.classList.remove("display-none")
     answerDisplay.classList.add("display-none")
+    
     //show the end game screen hide the question div
 }
 
 function showHighScores() {
-
+    scoresList.innerHTML = ''
     for (var i = 0; i < scores.length; i++) {
-        viewHighScores.innerHTML += `<p>Name: ${scores[0].name} Score: ${scores[0].score} </p>`
+        const paragraphTag = document.createElement("p");
+        const text = document.createTextNode(`Name: ${scores[i].name} Score: ${scores[i].score}`);
+        paragraphTag.appendChild(text)
+
+        scoresList.appendChild(paragraphTag)
     }
     viewHighScores.classList.remove("display-none")
 }
 
 function goBack() {
-    introDirv.classList.remove("diplay-none")
+    introDirv.classList.remove("display-none")
     viewHighScores.classList.add("display-none")
+    finalScreen.classList.add("display-none")
+    timerElement.classList.add("display-none")
+    viewHighScoresButton.classList.add("display-none")
 }
 
 function clearScores() {
     scores = []
+    scoresList.innerHTML = ''
 }
 
 startButton.addEventListener("click", startQuiz);
@@ -153,18 +164,24 @@ for (button of answerButtons) {
         if (questionNumber === 1) {
             if (answer === 'alerts') {
                 //correct
-    
+
                 //show correct div
                 answer.textContent = "Correct"
-                answerDisplay.classList.remove("display-none")
+                answerDisplay.classList.add("display-none")
+                answerDisplay2.classList.remove("display-none")
+
+
             }
             else {
                 //incorrect
                 timerCount -= 10
-                
+
                 //show incorrect div
                 answer.textContent = "Wrong"
                 answerDisplay.classList.remove("display-none")
+                answerDisplay2.classList.add("display-none")
+
+
             }
             createQuestion(2)
             return
@@ -172,12 +189,14 @@ for (button of answerButtons) {
         if (questionNumber === 2) {
             if (answer === 'parenthesis') {
                 //correct
-                
+                answerDisplay.classList.add("display-none")
+                answerDisplay2.classList.remove("display-none")
             }
             else {
                 //incorrect
                 timerCount -= 10
-                
+                answerDisplay.classList.remove("display-none")
+                answerDisplay2.classList.add("display-none")
             }
             createQuestion(3)
             return
@@ -185,12 +204,14 @@ for (button of answerButtons) {
         if (questionNumber === 3) {
             if (answer === 'all of the above') {
                 //correct
-                console.log("CORRECT")
+                answerDisplay.classList.add("display-none")
+                answerDisplay2.classList.remove("display-none")
             }
             else {
                 //incorrect
                 timerCount -= 10
-        
+                answerDisplay.classList.remove("display-none")
+                answerDisplay2.classList.add("display-none")
             }
             isWin = true
             return

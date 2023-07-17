@@ -42,3 +42,53 @@
 text-align: center;
 margin: 10%;
 }
+
+.final-screen {
+    text-align: center;
+}
+
+.submit-score {
+    color: white;
+    background-color: rgb(60, 31, 118);
+    border-radius: 5px;
+}
+
+.submit-score:hover{
+    background-color: rgb(168, 35, 123);
+}
+
+.go-back-button {
+    color: white;
+    background-color: rgb(60, 31, 118);
+    border-radius: 5px;
+    text-align: center;
+}
+
+.go-back-button:hover {
+    background-color: rgb(168, 35, 123);
+}
+
+.clear-scores-button {
+    color: white;
+    background-color: rgb(60, 31, 118);
+    text-align: center;
+    border-radius: 5px;
+}
+
+.clear-scores-button:hover {
+    background-color: rgb(168, 35, 123);
+}
+
+.view-high-scores {
+    text-align: center;
+}
+
+.view-high-scores-button {
+    color: white;
+    background-color: rgb(60, 31, 118);
+    border-radius: 5px;
+}
+
+.view-high-scores-button:hover{
+    background-color: rgb(168, 35, 123);
+}
